@@ -2,8 +2,8 @@ const siswa = require('../model/siswa');
 
 const getAll = async (req, res) => {
     try {
-    const siswa = await siswa.find();
-    res.status(200).json(siswa);
+    const data = await siswa.find();
+    res.status(200).json(data);
 } catch (error) {
     console.error(error);
     res.status(500).json({message: 'Server error' });
@@ -26,7 +26,18 @@ const create = async (req, res) => {
     }
   };
 
+  const getId = async (req, res) => {
+    try {
+    const data = await siswa.findById(req.params.id);
+    res.status(200).json(data);
+} catch (error) {
+    console.error(error);
+    res.status(500).json({message: 'Server error' });
+}
+}
+
 module.exports = {
     getAll,
-    create
+    create,
+    getId
 }
